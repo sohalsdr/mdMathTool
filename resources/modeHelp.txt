@@ -1,0 +1,16 @@
+----mdMathTool------------------------------------------------
+Various utilities to make working with math in markdown easier
+https://github.com/sohalsdr/mdMathTool
+
+MODES
+    Simple: Prompts user through individual arguments
+    Advanced: Accepts all arguments at command start
+
+USAGE
+    SIMPLE:     java -jar mdMathTool_<version>.jar -s
+    ADVANCED:   java -jar mdMathTool_<version>.jar -a <Source File> <Destination File> <Source Delimiter> <Destination Delimiter>
+
+FORMATS
+    Common math delimiters are $ and $$, although the program will accept any delimiter put in.
+    If "github" is chosen as the destination delimiter, the program will render all detected equations into images for use with GitHub.
+--------------------------------------------------------------

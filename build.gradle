@@ -5,13 +5,18 @@ plugins {
 jar {
     manifest {
         attributes(
-                'Main-Class': 'mdMathTool'
+                'Main-Class': 'com.github.sohalsdr.mdMathTool.mdMathTool'
         )
     }
 }
 
+shadowJar{
+    archiveVersion = '1.0.0-1'
+    archiveFileName = "mdMathTool_${version}.${extension}"
+}
+
 group 'com.github.sohalsdr'
-version '1.0.0'
+version '1.0.0-1'
 
 repositories {
     mavenCentral()

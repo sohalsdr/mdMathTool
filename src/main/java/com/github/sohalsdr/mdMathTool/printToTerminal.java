@@ -1,14 +1,17 @@
 package com.github.sohalsdr.mdMathTool;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.Scanner;
 
 public class printToTerminal extends Object {
-    public static void printOut(File toPrint) throws FileNotFoundException {
-        Scanner in = new Scanner(toPrint);
-        while(in.hasNextLine()) {
-            System.out.println(in.nextLine());
+    public static void printOut(File toPrint) {
+        try {
+            Scanner text = new Scanner(toPrint);
+            while (text.hasNextLine()) {
+                System.out.println(text.nextLine());
+            }
+        } catch (IOException | NullPointerException ex) {
+            ex.printStackTrace();
         }
     }
 }
