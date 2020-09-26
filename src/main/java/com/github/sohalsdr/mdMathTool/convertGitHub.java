@@ -18,7 +18,8 @@ public class convertGitHub {
             System.out.println("File " + destDir + " Created");
         }
         String buffer;
-
+        String delimL = " "+sourceDelim;
+        String delimR = sourceDelim;
         try {
             Scanner in = new Scanner(sourceFile);
             FileWriter file = new FileWriter(destFile);
@@ -27,9 +28,9 @@ public class convertGitHub {
                 buffer = in.nextLine();
                 int pos1, pos2;
                 for (int i = 0; i < buffer.length(); i++) {
-                    pos1 = buffer.indexOf(sourceDelim, i);
+                    pos1 = buffer.indexOf(delimL, i);
                     if (pos1 != -1) {
-                        pos2 = (buffer.indexOf(sourceDelim, (pos1+1)));
+                        pos2 = (buffer.indexOf(delimR, (pos1+1)));
                         if (pos2 != -1) {
                             String equation = buffer.substring(pos1, (pos2+1));
                             buffer= buffer.replace(equation, githubify(equation));
