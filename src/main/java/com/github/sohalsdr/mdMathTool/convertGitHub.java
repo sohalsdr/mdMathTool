@@ -46,6 +46,7 @@ public class convertGitHub {
                 writer.newLine();
             }
             writer.close();
+            System.out.println("Conversion completed.");
         } catch (NoSuchMethodException | ScriptException e) {
             e.printStackTrace();
         }
