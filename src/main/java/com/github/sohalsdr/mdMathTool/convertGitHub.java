@@ -22,7 +22,7 @@ public class convertGitHub {
             System.out.println("File " + destDir + " Created");
         }
         String buffer;
-        String delimL = " "+sourceDelim;
+        String delimL = sourceDelim;
         String delimR = sourceDelim;
         try {
             Scanner in = new Scanner(sourceFile);

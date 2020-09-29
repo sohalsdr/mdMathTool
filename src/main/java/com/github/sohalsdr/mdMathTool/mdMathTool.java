@@ -1,6 +1,9 @@
 package com.github.sohalsdr.mdMathTool;
+import org.apache.commons.text.StringEscapeUtils;
+
 import java.io.*;
 
+import static com.github.sohalsdr.mdMathTool.changeDelims.replaceDelims;
 import static com.github.sohalsdr.mdMathTool.convertGitHub.convertToGitHub;
 import static com.github.sohalsdr.mdMathTool.printToTerminal.printOut;
 
@@ -11,10 +14,12 @@ public class mdMathTool {
                 String mode = args[0];
                 if (mode.equals("-a")) {
                     try {
-                        advancedMode(args[1], args[2], args[3], args[4]);
+                        advancedMode(args[1], args[2], StringEscapeUtils.escapeJava(args[3]), args[4]);
                     } catch (ArrayIndexOutOfBoundsException e) {
                         e.printStackTrace();
                     }
+                } else if (mode.equals("-s")); {
+                    simpleMode();
                 }
             } else if(args[0].equals("help")) {
                 // File modeHelp = new File("./modeHelp.txt");
@@ -53,8 +58,65 @@ public class mdMathTool {
     public static void advancedMode(String sourceDir, String destDir, String sourceDelim, String destDelim) throws IOException {
         sourceDir = sourceDir.replace('~', '.');
         destDir = destDir.replace('~', '.');
-        if (destDelim.equals("github")) {
+        if (destDelim.toLowerCase().equals("github")) {
             convertToGitHub(sourceDir, destDir, sourceDelim);
+        } else {
+            String sourceDelimL = sourceDelim;
+            String sourceDelimR = sourceDelim;
+            if (sourceDelim.toLowerCase().equals("latex\\[")) {
+                // sourceDelimL = "\\[";
+                // sourceDelimR = "\\]";
+                System.err.println("This delimiter option is not supported yet");
+                System.exit(0);
+            }
+            if (sourceDelim.toLowerCase().equals("latex\\(")) {
+                // sourceDelimL = "\\[";
+                // sourceDelimR = "\\]";
+                System.err.println("This delimiter option is not supported yet");
+                System.exit(0);
+            }
+            if (sourceDelim.toLowerCase().equals("latex\\\\[")) {
+                // sourceDelimL = "\\[";
+                // sourceDelimR = "\\]";
+                System.err.println("This delimiter option is not supported yet");
+                System.exit(0);
+            }
+            if (sourceDelim.toLowerCase().equals("latex\\\\(")) {
+                // sourceDelimL = "\\[";
+                // sourceDelimR = "\\]";
+                System.err.println("This delimiter option is not supported yet");
+                System.exit(0);
+            }
+            String destDelimL = destDelim;
+            String destDelimR = destDelim;
+            if (destDelim.toLowerCase().equals("latex\\[")) {
+                // destDelimL = "\\[";
+                // destDelimR = "\\]";
+                System.err.println("This delimiter option is not supported yet");
+                System.exit(0);
+            }
+            if (destDelim.toLowerCase().equals("latex\\(")) {
+                // destDelimL = "\\[";
+                // destDelimR = "\\]";
+                System.err.println("This delimiter option is not supported yet");
+                System.exit(0);
+            }
+            if (destDelim.toLowerCase().equals("latex\\\\[")) {
+                // destDelimL = "\\[";
+                // destDelimR = "\\]";
+                System.err.println("This delimiter option is not supported yet");
+                System.exit(0);
+            }
+            if (destDelim.toLowerCase().equals("latex\\\\(")) {
+                // destDelimL = "\\[";
+                // destDelimR = "\\]";
+                System.err.println("This delimiter option is not supported yet");
+                System.exit(0);
+            }
+            replaceDelims(sourceDir, destDir, sourceDelimL, sourceDelimR, destDelimL, destDelimR);
         }
+    }
+    public static void simpleMode() {
+        
     }
 }
