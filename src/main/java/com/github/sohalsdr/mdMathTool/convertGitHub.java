@@ -30,15 +30,17 @@ public class convertGitHub {
             BufferedWriter writer = new BufferedWriter(file);
             while (in.hasNextLine()) {
                 buffer = in.nextLine();
-                int pos1, pos2;
-                for (int i = 0; i < buffer.length(); i++) {
-                    pos1 = buffer.indexOf(delimL, i);
-                    if (pos1 != -1) {
-                        pos2 = (buffer.indexOf(delimR, (pos1+1)));
-                        if (pos2 != -1) {
-                            String equation = buffer.substring(pos1, (pos2+1));
-                            buffer= buffer.replace(equation, githubify(equation));
-                            i = pos2+1;
+                if (buffer.length() > 2) {
+                    int pos1, pos2;
+                    for (int i = 0; i < buffer.length(); i++) {
+                        pos1 = buffer.indexOf(delimL, i);
+                        if (pos1 != -1) {
+                            pos2 = (buffer.indexOf(delimR, (pos1 + 1)));
+                            if (pos2 != -1) {
+                                String equation = buffer.substring(pos1, (pos2 + 1));
+                                buffer = buffer.replace(equation, githubify(equation));
+                                i = pos2 + 1;
+                            }
                         }
                     }
                 }

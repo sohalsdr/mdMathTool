@@ -25,16 +25,19 @@ public class changeDelims {
         BufferedWriter writer = new BufferedWriter(file);
         while (in.hasNextLine()) {
             buffer = in.nextLine();
-            int pos1, pos2;
-            for (int i = 0; i < buffer.length(); i++) {
-                pos1 = buffer.indexOf(sourceDelimL, i);
-                if (pos1 != -1) {
-                    pos2 = (buffer.indexOf(sourceDelimR, (pos1+1)));
-                    if (pos2 != -1) {
-                        String equation = buffer.substring(pos1, (pos2+1));
-                        String modifiedEquation = destDelimL+(equation.substring(sourceDelimL.length(), (equation.length()-sourceDelimR.length())))+destDelimR;
-                        buffer= StringEscapeUtils.unescapeJava(buffer.replace(equation, modifiedEquation));
-                        i = pos2+1;
+            if (buffer.length() > 2) {
+                int pos1, pos2;
+                for (int i = 0; i < buffer.length(); i++) {
+                    pos1 = buffer.indexOf(sourceDelimL, i);
+                    if (pos1 != -1) {
+                        pos2 = (buffer.indexOf(sourceDelimR, (pos1 + 1)));
+                        if (pos2 != -1) {
+                            String equation = buffer.substring(pos1, (pos2 + 1));
+                            String modifiedEquation = destDelimL + (equation.substring(sourceDelimL.length(), (equation.length() - sourceDelimR.length()))) + destDelimR;
+                            System.out.println(equation);
+                            buffer = buffer.replace(equation, modifiedEquation);
+                            i = pos2 + destDelimR.length();
+                        }
                     }
                 }
             }

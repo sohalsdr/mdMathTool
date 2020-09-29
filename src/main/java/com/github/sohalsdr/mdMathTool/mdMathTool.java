@@ -2,6 +2,7 @@ package com.github.sohalsdr.mdMathTool;
 import org.apache.commons.text.StringEscapeUtils;
 
 import java.io.*;
+import java.util.Scanner;
 
 import static com.github.sohalsdr.mdMathTool.changeDelims.replaceDelims;
 import static com.github.sohalsdr.mdMathTool.convertGitHub.convertToGitHub;
@@ -18,7 +19,7 @@ public class mdMathTool {
                     } catch (ArrayIndexOutOfBoundsException e) {
                         e.printStackTrace();
                     }
-                } else if (mode.equals("-s")); {
+                } else if (mode.equals("-s")) {
                     simpleMode();
                 }
             } else if(args[0].equals("help")) {
@@ -56,6 +57,10 @@ public class mdMathTool {
         }
     }
     public static void advancedMode(String sourceDir, String destDir, String sourceDelim, String destDelim) throws IOException {
+        if (destDir.equals(sourceDir)) {
+            System.err.println("You have chosen the same file for both sources. Please choose a different destination file.");
+            System.exit(0);
+        }
         sourceDir = sourceDir.replace('~', '.');
         destDir = destDir.replace('~', '.');
         if (destDelim.toLowerCase().equals("github")) {
@@ -116,7 +121,83 @@ public class mdMathTool {
             replaceDelims(sourceDir, destDir, sourceDelimL, sourceDelimR, destDelimL, destDelimR);
         }
     }
-    public static void simpleMode() {
-        
+    public static void simpleMode() throws IOException {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Welcome to mdMathTool Simple Mode.");
+        System.out.print("Please enter the path to your source file. Note that it should either be an absolute path from root (e. g. /Users/sohalsdr/Desktop/example.md), or a relative path from home if on a UNIX-based system (~/Desktop/example.md).\n Source File: ");
+        String sourceDir = in.nextLine().replace(" ", "");
+        System.out.print("Please enter the path to your destination file. Note that it should either be an absolute path from root (e. g. /Users/sohalsdr/Desktop/exampleOutput.md), or a relative path from home if on a UNIX-based system (~/Desktop/exampleOutput.md).\n Destination File: ");
+        String destDir = in.nextLine().replace(" ", "");
+        sourceDir = sourceDir.replace('~', '.');
+        destDir = destDir.replace('~', '.');
+        if (destDir.equals(sourceDir)) {
+            System.err.println("You have chosen the same file for both sources. Please choose a different destination file.");
+            System.exit(0);
+        }
+        System.out.print("Please enter your source delimiter.\nSource Delimiter: ");
+        String sourceDelim = in.nextLine().replace(" ", "").replace("\'", "");
+        System.out.print("Please enter your destination delimiter.\nDestination Delimiter: ");
+        String destDelim = in.nextLine().replace(" ", "").replace("\'", "");
+        System.out.println(sourceDelim);
+        System.out.println(destDelim);
+        if (destDelim.toLowerCase().equals("github")) {
+            System.out.println("github triggered");
+            convertToGitHub(sourceDir, destDir, sourceDelim);
+        } else {
+            String sourceDelimL = sourceDelim;
+            String sourceDelimR = sourceDelim;
+            if (sourceDelim.toLowerCase().equals("latex\\[")) {
+                // sourceDelimL = "\\[";
+                // sourceDelimR = "\\]";
+                System.err.println("This delimiter option is not supported yet");
+                System.exit(0);
+            }
+            if (sourceDelim.toLowerCase().equals("latex\\(")) {
+                // sourceDelimL = "\\[";
+                // sourceDelimR = "\\]";
+                System.err.println("This delimiter option is not supported yet");
+                System.exit(0);
+            }
+            if (sourceDelim.toLowerCase().equals("latex\\\\[")) {
+                // sourceDelimL = "\\[";
+                // sourceDelimR = "\\]";
+                System.err.println("This delimiter option is not supported yet");
+                System.exit(0);
+            }
+            if (sourceDelim.toLowerCase().equals("latex\\\\(")) {
+                // sourceDelimL = "\\[";
+                // sourceDelimR = "\\]";
+                System.err.println("This delimiter option is not supported yet");
+                System.exit(0);
+            }
+            String destDelimL = destDelim;
+            String destDelimR = destDelim;
+            if (destDelim.toLowerCase().equals("latex\\[")) {
+                // destDelimL = "\\[";
+                // destDelimR = "\\]";
+                System.err.println("This delimiter option is not supported yet");
+                System.exit(0);
+            }
+            if (destDelim.toLowerCase().equals("latex\\(")) {
+                // destDelimL = "\\[";
+                // destDelimR = "\\]";
+                System.err.println("This delimiter option is not supported yet");
+                System.exit(0);
+            }
+            if (destDelim.toLowerCase().equals("latex\\\\[")) {
+                // destDelimL = "\\[";
+                // destDelimR = "\\]";
+                System.err.println("This delimiter option is not supported yet");
+                System.exit(0);
+            }
+            if (destDelim.toLowerCase().equals("latex\\\\(")) {
+                // destDelimL = "\\[";
+                // destDelimR = "\\]";
+                System.err.println("This delimiter option is not supported yet");
+                System.exit(0);
+            }
+            replaceDelims(sourceDir, destDir, sourceDelimL, sourceDelimR, destDelimL, destDelimR);
+        }
+
     }
 }
