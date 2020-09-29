@@ -11,6 +11,6 @@ USAGE
     ADVANCED:   java -jar mdMathTool_<version>.jar -a <Source File> <Destination File> <Source Delimiter> <Destination Delimiter>
 
 FORMATS
-    Common math delimiters are $ and $$, although the program will accept any delimiter put in.
-    If "github" is chosen as the destination delimiter, the program will render all detected equations into images for use with GitHub.
+    Common math delimiters are $ and $$, although the program will accept any delimiter put in. In Advanced Mode, delimiters must be surrounded with ' '
+(e.g. '$'). Simple mode does not require the ' ' (for whatever reason). If "github" is chosen as the destination delimiter, the program will render all detected equations into images for use with GitHub.
 --------------------------------------------------------------

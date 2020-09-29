@@ -38,8 +38,8 @@ public class mdMathTool {
                         "    ADVANCED:   java -jar mdMathTool_<version>.jar -a <Source File> <Destination File> <Source Delimiter> <Destination Delimiter>\n" +
                         "\n" +
                         "FORMATS\n" +
-                        "    Common math delimiters are $ and $$, although the program will accept any delimiter put in.\n" +
-                        "    If \"github\" is chosen as the destination delimiter, the program will render all detected equations into images for use with GitHub.\n" +
+                        "    Common math delimiters are $ and $$, although the program will accept any delimiter put in. In Advanced Mode, delimiters must be surrounded with ' '\n" +
+                        "(e.g. '$'). Simple mode does not require the ' ' (for whatever reason). If \"github\" is chosen as the destination delimiter, the program will render all detected equations into images for use with GitHub.\n" +
                         "--------------------------------------------------------------");
 
                 System.exit(0);
