@@ -17,7 +17,7 @@ public class mdMathTool {
                     }
                 }
             } else if(args[0].equals("help")) {
-                File modeHelp = new File("resources/modeHelp.txt");
+                File modeHelp = new File("./modeHelp.txt");
                 printOut(modeHelp);
                 System.exit(0);
             } else {
@@ -34,8 +34,8 @@ public class mdMathTool {
         }
     }
     public static void advancedMode(String sourceDir, String destDir, String sourceDelim, String destDelim) throws IOException {
-        sourceDir = sourceDir.replace("\"", "");
-        destDir = destDir.replace("\"", "");
+        sourceDir = sourceDir.replace('~', '.');
+        destDir = destDir.replace('~', '.');
         if (destDelim.equals("github")) {
             convertToGitHub(sourceDir, destDir, sourceDelim);
         }

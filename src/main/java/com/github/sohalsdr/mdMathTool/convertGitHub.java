@@ -11,9 +11,13 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class convertGitHub {
-    public static void convertToGitHub(String sourceDir, String destDir, String sourceDelim) throws IOException {
+    public static void convertToGitHub(String sourceDir, String destDir, String sourceDelim) throws IOException{
         File sourceFile = new File (sourceDir);
         File destFile = new File (destDir);
+        if (!destFile.getParentFile().exists())
+            destFile.getParentFile().mkdirs();
+        if (!destFile.exists())
+            destFile.createNewFile();
         if (destFile.createNewFile()) {
             System.out.println("File " + destDir + " Created");
         }
@@ -42,7 +46,7 @@ public class convertGitHub {
                 writer.newLine();
             }
             writer.close();
-        } catch (IOException | NoSuchMethodException | ScriptException e) {
+        } catch (NoSuchMethodException | ScriptException e) {
             e.printStackTrace();
         }
     }
