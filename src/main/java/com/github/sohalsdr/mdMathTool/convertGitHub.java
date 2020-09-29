@@ -21,9 +21,13 @@ public class convertGitHub {
         if (destFile.createNewFile()) {
             System.out.println("File " + destDir + " Created");
         }
+        System.out.println("Source File: "+sourceFile);
+        System.out.println("Destination File: "+destFile);
+        System.out.println("Source delimiters: "+sourceDelim+"<equation>"+sourceDelim);
         String buffer;
         String delimL = sourceDelim;
         String delimR = sourceDelim;
+        int eqCount = 0;
         try {
             Scanner in = new Scanner(sourceFile);
             FileWriter file = new FileWriter(destFile);
@@ -39,6 +43,7 @@ public class convertGitHub {
                             if (pos2 != -1) {
                                 String equation = buffer.substring(pos1, (pos2 + 1));
                                 buffer = buffer.replace(equation, githubify(equation));
+                                eqCount++;
                                 i = pos2 + 1;
                             }
                         }
@@ -48,6 +53,7 @@ public class convertGitHub {
                 writer.newLine();
             }
             writer.close();
+            System.out.println(eqCount+" equations found");
             System.out.println("Conversion completed.");
         } catch (NoSuchMethodException | ScriptException e) {
             e.printStackTrace();

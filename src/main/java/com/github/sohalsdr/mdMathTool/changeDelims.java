@@ -19,10 +19,15 @@ public class changeDelims {
         if (destFile.createNewFile()) {
             System.out.println("File " + destDir + " Created");
         }
+        System.out.println("Source File: "+sourceFile);
+        System.out.println("Destination File: "+destFile);
+        System.out.println("Source delimiters: "+sourceDelimL+"<equation>"+sourceDelimR);
+        System.out.println("Destination delimiters: "+destDelimL+"<equation>"+destDelimR);
         String buffer;
         Scanner in = new Scanner(sourceFile);
         FileWriter file = new FileWriter(destFile);
         BufferedWriter writer = new BufferedWriter(file);
+        int eqCount = 0;
         while (in.hasNextLine()) {
             buffer = in.nextLine();
             if (buffer.length() > 2) {
@@ -34,7 +39,7 @@ public class changeDelims {
                         if (pos2 != -1) {
                             String equation = buffer.substring(pos1, (pos2 + 1));
                             String modifiedEquation = destDelimL + (equation.substring(sourceDelimL.length(), (equation.length() - sourceDelimR.length()))) + destDelimR;
-                            System.out.println(equation);
+                            eqCount++;
                             buffer = buffer.replace(equation, modifiedEquation);
                             i = pos2 + destDelimR.length();
                         }
@@ -45,6 +50,7 @@ public class changeDelims {
             writer.newLine();
         }
         writer.close();
+        System.out.println(eqCount+" equations found");
         System.out.println("Conversion completed.");
     }
 }
