@@ -161,6 +161,10 @@ public class mdMathTool {
             System.err.println("You have chosen the same file for both sources. Please choose a different destination file.");
             System.exit(0);
         }
+        if (!(sourceDir.substring(sourceDir.lastIndexOf(".")).equals(".md")) || !(destDir.substring(destDir.lastIndexOf(".")).equals(".md")) ){
+            System.out.println("Either your source or destination file was not a .md file. Please try again");
+            System.exit(0);
+        }
         System.out.print("Please enter your source delimiter.\nSource Delimiter: ");
         String sourceDelim = in.nextLine().replace(" ", "").replace("\'", "");
         System.out.print("Please enter your destination delimiter.\nDestination Delimiter: ");
