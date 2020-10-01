@@ -50,7 +50,7 @@ public class mdMathTool {
                         "(e.g. '$'). Simple mode does not require the ' ' (for whatever reason).\n" +
                         "    If \"github\" is chosen as the destination delimiter, the program will render all detected equations into images for use with GitHub.\n" +
                         "    For Batch mode, the <Append To File Name> flag is a string that will be appended to the end of the filename, before the extension. For example, if a folder you passed through batchmode had \"test.md\" and \"anothertest.md\", and you put \"bananas\" as appendToFileName, the output files would be \"testbananas.md\" and \"anothertestbananas.md\". appendToFileName cannot have any spaces.\n" +
-                        "-------------------------------------------------------------");
+                        "-------------------------------------------------------------\n");
 
                 System.exit(0);
             } else {
