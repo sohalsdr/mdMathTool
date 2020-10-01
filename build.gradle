@@ -11,7 +11,7 @@ jar {
 }
 
 shadowJar{
-    archiveVersion = '1.0.0'
+    archiveVersion = '1.1.0'
     archiveFileName = "mdMathTool_${version}.${extension}"
 }
 

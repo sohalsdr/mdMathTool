@@ -34,7 +34,17 @@ public class convertGitHub {
             BufferedWriter writer = new BufferedWriter(file);
             while (in.hasNextLine()) {
                 buffer = in.nextLine();
-                if (buffer.length() > 2) {
+                if (buffer.equals("$$")) {
+                    buffer = "";
+                    writer.write(buffer);
+                    writer.newLine();
+                    buffer = in.nextLine();
+                    buffer = githubify(buffer);
+                    writer.write(buffer);
+                    writer.newLine();
+                    buffer = in.nextLine();
+                    buffer = "";
+                } else {
                     int pos1, pos2;
                     for (int i = 0; i < buffer.length(); i++) {
                         pos1 = buffer.indexOf(delimL, i);
