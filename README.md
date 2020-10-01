@@ -18,13 +18,12 @@ This is a tool to help work with inline math in markdown. Math can be frustratin
 - Currently cannot do LaTeX style delimiters (e. g. "\\[x^2\\]")
 - Currently does not employ any heuristics, [Pandoc](https://github.com/jgm/pandoc) style heuristics for dollar-sign delimiters is planned
 - Does not parse the markdown, only performs basic string substitution
-- Does not convert math blocks currently, as those are the same across most markdown engines.
 
 ## Usage
 
 To use mdMathTool, start by downloading the latest release, and opening a terminal in the same folder as the .jar file.
 
-mdMathTool has two modes: Simple Mode and Advanced Mode.
+mdMathTool has three modes: Simple Mode, Advanced Mode, and Batch Mode:
 
 Simple Mode prompts the user for all values, and can be run with:
 
@@ -38,11 +37,18 @@ Advanced Mode takes all arguments when the command is run, and can be run as fol
 $ java -jar mdMathTool-1.0.0.jar -a <source filepath> <destination filepath> <source delimiter> <destination delimiter>
 ```
 
+Batch Mode takes all arguments when the command is run, and can be run as follows:
+
+```
+$ java -jar mdMathTool-1.0.0.jar -b <source filepath> <append to filename> <source delimiter> <destination delimiter>
+```
+
 **Notes:**
 
 - Source and destination delimiters must be surrounded by ' ' (e. g. '\$')
 - Source filepath and destination file path cannot be the same file
 - mdMathTool will create the destination filepath specified if it does not already exist
+- The append to file name argument appends the specified string directly after the filename, before the extension. It cannot be left empty.
 
 
 
