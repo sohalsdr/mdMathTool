@@ -31,7 +31,7 @@ public class mdMathTool {
             } else if(args[0].equals("help")) {
                 // File modeHelp = new File("./modeHelp.txt");
                 // printOut(modeHelp);
-                System.out.print("----mdMathTool------------------------------------------------\n" +
+                System.out.print("----mdMathTool-----------------------------------------------\n" +
                         "Various utilities to make working with math in markdown easier\n" +
                         "https://github.com/sohalsdr/mdMathTool\n" +
                         "\n" +
@@ -50,7 +50,7 @@ public class mdMathTool {
                         "(e.g. '$'). Simple mode does not require the ' ' (for whatever reason).\n" +
                         "    If \"github\" is chosen as the destination delimiter, the program will render all detected equations into images for use with GitHub.\n" +
                         "    For Batch mode, the <Append To File Name> flag is a string that will be appended to the end of the filename, before the extension. For example, if a folder you passed through batchmode had \"test.md\" and \"anothertest.md\", and you put \"bananas\" as appendToFileName, the output files would be \"testbananas.md\" and \"anothertestbananas.md\". appendToFileName cannot have any spaces.\n" +
-                        "--------------------------------------------------------------");
+                        "-------------------------------------------------------------");
 
                 System.exit(0);
             } else {
