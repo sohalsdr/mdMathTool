@@ -11,16 +11,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class convertGitHub {
-    public static void convertToGitHub(String sourceDir, String destDir, String sourceDelim) throws IOException{
-        File sourceFile = new File (sourceDir);
-        File destFile = new File (destDir);
-        if (!destFile.getParentFile().exists())
-            destFile.getParentFile().mkdirs();
-        if (!destFile.exists())
-            destFile.createNewFile();
-        if (destFile.createNewFile()) {
-            System.out.println("File " + destDir + " Created");
-        }
+    public static void convertToGitHub(File sourceFile, File destFile, String sourceDelim) throws IOException{
         System.out.println("Source File: "+sourceFile);
         System.out.println("Destination File: "+destFile);
         System.out.println("Source delimiters: "+sourceDelim+"<equation>"+sourceDelim);

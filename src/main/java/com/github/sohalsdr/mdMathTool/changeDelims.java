@@ -9,16 +9,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class changeDelims {
-    public static void replaceDelims(String sourceDir, String destDir, String sourceDelimL, String sourceDelimR,  String destDelimL, String destDelimR) throws IOException {
-        File sourceFile = new File (sourceDir);
-        File destFile = new File (destDir);
-        if (!destFile.getParentFile().exists())
-            destFile.getParentFile().mkdirs();
-        if (!destFile.exists())
-            destFile.createNewFile();
-        if (destFile.createNewFile()) {
-            System.out.println("File " + destDir + " Created");
-        }
+    public static void replaceDelims(File sourceFile, File destFile, String sourceDelimL, String sourceDelimR,  String destDelimL, String destDelimR) throws IOException {
         System.out.println("Source File: "+sourceFile);
         System.out.println("Destination File: "+destFile);
         System.out.println("Source delimiters: "+sourceDelimL+"<equation>"+sourceDelimR);

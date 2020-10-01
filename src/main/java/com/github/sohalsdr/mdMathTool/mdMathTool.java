@@ -11,7 +11,7 @@ import static com.github.sohalsdr.mdMathTool.printToTerminal.printOut;
 public class mdMathTool {
     public static void main(String[] args) {
         try {
-            if ((args[0].equals("-a")) || (args[0].equals("-s"))) {
+            if ((args[0].equals("-a")) || (args[0].equals("-s")) || (args[0].equals("-b"))) {
                 String mode = args[0];
                 if (mode.equals("-a")) {
                     try {
@@ -21,6 +21,8 @@ public class mdMathTool {
                     }
                 } else if (mode.equals("-s")) {
                     simpleMode();
+                } else if (mode.equals("-b")) {
+                    batchMode(args[1], args[2], StringEscapeUtils.escapeJava(args[3]), args[4]);
                 }
             } else if(args[0].equals("help")) {
                 // File modeHelp = new File("./modeHelp.txt");
@@ -64,7 +66,16 @@ public class mdMathTool {
         sourceDir = sourceDir.replace('~', '.');
         destDir = destDir.replace('~', '.');
         if (destDelim.toLowerCase().equals("github")) {
-            convertToGitHub(sourceDir, destDir, sourceDelim);
+            File sourceFile = new File (sourceDir);
+            File destFile = new File (destDir);
+            if (!destFile.getParentFile().exists())
+                destFile.getParentFile().mkdirs();
+            if (!destFile.exists())
+                destFile.createNewFile();
+            if (destFile.createNewFile()) {
+                System.out.println("File " + destDir + " Created");
+            }
+            convertToGitHub(sourceFile, destFile, sourceDelim);
         } else {
             String sourceDelimL = sourceDelim;
             String sourceDelimR = sourceDelim;
@@ -118,7 +129,16 @@ public class mdMathTool {
                 System.err.println("This delimiter option is not supported yet");
                 System.exit(0);
             }
-            replaceDelims(sourceDir, destDir, sourceDelimL, sourceDelimR, destDelimL, destDelimR);
+            File sourceFile = new File (sourceDir);
+            File destFile = new File (destDir);
+            if (!destFile.getParentFile().exists())
+                destFile.getParentFile().mkdirs();
+            if (!destFile.exists())
+                destFile.createNewFile();
+            if (destFile.createNewFile()) {
+                System.out.println("File " + destDir + " Created");
+            }
+            replaceDelims(sourceFile, destFile, sourceDelimL, sourceDelimR, destDelimL, destDelimR);
         }
     }
     public static void simpleMode() throws IOException {
@@ -141,8 +161,16 @@ public class mdMathTool {
         System.out.println(sourceDelim);
         System.out.println(destDelim);
         if (destDelim.toLowerCase().equals("github")) {
-            System.out.println("github triggered");
-            convertToGitHub(sourceDir, destDir, sourceDelim);
+            File sourceFile = new File (sourceDir);
+            File destFile = new File (destDir);
+            if (!destFile.getParentFile().exists())
+                destFile.getParentFile().mkdirs();
+            if (!destFile.exists())
+                destFile.createNewFile();
+            if (destFile.createNewFile()) {
+                System.out.println("File " + destDir + " Created");
+            }
+            convertToGitHub(sourceFile, destFile, sourceDelim);
         } else {
             String sourceDelimL = sourceDelim;
             String sourceDelimR = sourceDelim;
@@ -196,8 +224,94 @@ public class mdMathTool {
                 System.err.println("This delimiter option is not supported yet");
                 System.exit(0);
             }
-            replaceDelims(sourceDir, destDir, sourceDelimL, sourceDelimR, destDelimL, destDelimR);
+            File sourceFile = new File (sourceDir);
+            File destFile = new File (destDir);
+            if (!destFile.getParentFile().exists())
+                destFile.getParentFile().mkdirs();
+            if (!destFile.exists())
+                destFile.createNewFile();
+            if (destFile.createNewFile()) {
+                System.out.println("File " + destDir + " Created");
+            }
+            replaceDelims(sourceFile, destFile, sourceDelimL, sourceDelimR, destDelimL, destDelimR);
         }
 
+    }
+    public static void batchMode(String sourceDirString, String appendToFilename, String sourceDelim, String destDelim) throws IOException {
+        sourceDirString = sourceDirString.replace('~', '.');
+        File sourceDir = new File(sourceDirString);
+        if(sourceDir.isDirectory()) {
+            for(File sourceFile : sourceDir.listFiles()) {
+                String sourceFileString = sourceFile.toString();
+                System.out.println(sourceFileString);
+                int lastDotIndex = sourceFileString.lastIndexOf(".");
+                String destFileString = sourceFileString.substring(0, lastDotIndex)+appendToFilename+sourceFileString.substring(lastDotIndex);
+                File destFile = new File(destFileString);
+                if (destFile.createNewFile()) {
+                    System.out.println("File " + destFileString + " Created");
+                }
+                if (destDelim.toLowerCase().equals("github")) {
+                    convertToGitHub(sourceFile, destFile, sourceDelim);
+                } else {
+                    String sourceDelimL = sourceDelim;
+                    String sourceDelimR = sourceDelim;
+                    if (sourceDelim.toLowerCase().equals("latex\\[")) {
+                        // sourceDelimL = "\\[";
+                        // sourceDelimR = "\\]";
+                        System.err.println("This delimiter option is not supported yet");
+                        System.exit(0);
+                    }
+                    if (sourceDelim.toLowerCase().equals("latex\\(")) {
+                        // sourceDelimL = "\\[";
+                        // sourceDelimR = "\\]";
+                        System.err.println("This delimiter option is not supported yet");
+                        System.exit(0);
+                    }
+                    if (sourceDelim.toLowerCase().equals("latex\\\\[")) {
+                        // sourceDelimL = "\\[";
+                        // sourceDelimR = "\\]";
+                        System.err.println("This delimiter option is not supported yet");
+                        System.exit(0);
+                    }
+                    if (sourceDelim.toLowerCase().equals("latex\\\\(")) {
+                        // sourceDelimL = "\\[";
+                        // sourceDelimR = "\\]";
+                        System.err.println("This delimiter option is not supported yet");
+                        System.exit(0);
+                    }
+                    String destDelimL = destDelim;
+                    String destDelimR = destDelim;
+                    if (destDelim.toLowerCase().equals("latex\\[")) {
+                        // destDelimL = "\\[";
+                        // destDelimR = "\\]";
+                        System.err.println("This delimiter option is not supported yet");
+                        System.exit(0);
+                    }
+                    if (destDelim.toLowerCase().equals("latex\\(")) {
+                        // destDelimL = "\\[";
+                        // destDelimR = "\\]";
+                        System.err.println("This delimiter option is not supported yet");
+                        System.exit(0);
+                    }
+                    if (destDelim.toLowerCase().equals("latex\\\\[")) {
+                        // destDelimL = "\\[";
+                        // destDelimR = "\\]";
+                        System.err.println("This delimiter option is not supported yet");
+                        System.exit(0);
+                    }
+                    if (destDelim.toLowerCase().equals("latex\\\\(")) {
+                        // destDelimL = "\\[";
+                        // destDelimR = "\\]";
+                        System.err.println("This delimiter option is not supported yet");
+                        System.exit(0);
+                    }
+                    replaceDelims(sourceFile, destFile, sourceDelimL, sourceDelimR, destDelimL, destDelimR);
+                }
+            }
+
+        }else {
+            System.out.println(sourceDirString + " is not a valid folder. Either select a folder, or run with the -a argument to process a single file.");
+            System.exit(0);
+        }
     }
 }
