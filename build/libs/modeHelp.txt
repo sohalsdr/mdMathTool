@@ -5,6 +5,7 @@ https://github.com/sohalsdr/mdMathTool
 MODES
     Simple: Prompts user through individual arguments
     Advanced: Accepts all arguments at command start
+    Batch: Same as Advanced, but converts a whole folder
 
 USAGE
     SIMPLE:     java -jar mdMathTool_<version>.jar -s
@@ -12,5 +13,7 @@ USAGE
 
 FORMATS
     Common math delimiters are $ and $$, although the program will accept any delimiter put in. In Advanced Mode, delimiters must be surrounded with ' '
-(e.g. '$'). Simple mode does not require the ' ' (for whatever reason). If "github" is chosen as the destination delimiter, the program will render all detected equations into images for use with GitHub.
+(e.g. '$'). Simple mode does not require the ' ' (for whatever reason).
+    If "github" is chosen as the destination delimiter, the program will render all detected equations into images for use with GitHub.
+    For Batch mode, the <appendToFileName> flag is a string that will be appended to the end of the filename, before the extension. For example, if a folder you passed through batchmode had "test.md" and "anothertest.md", and you put "bananas" as appendToFileName, the output files would be "testbananas.md" and "anothertestbananas.md". appendToFileName cannot have any spaces.
 --------------------------------------------------------------

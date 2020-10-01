@@ -15,7 +15,11 @@ public class mdMathTool {
                 String mode = args[0];
                 if (mode.equals("-a")) {
                     try {
-                        advancedMode(args[1], args[2], StringEscapeUtils.escapeJava(args[3]), args[4]);
+                        if ((args[1].substring(args[1].lastIndexOf(".")).equals(".md")) && (args[2].substring(args[2].lastIndexOf(".")).equals(".md"))) {
+                            advancedMode(args[1], args[2], StringEscapeUtils.escapeJava(args[3]), args[4]);
+                        } else{
+                            System.out.println("Either your source or destination file are not .md files.");
+                        }
                     } catch (ArrayIndexOutOfBoundsException e) {
                         e.printStackTrace();
                     }
@@ -34,6 +38,7 @@ public class mdMathTool {
                         "MODES\n" +
                         "    Simple: Prompts user through individual arguments\n" +
                         "    Advanced: Accepts all arguments at command start\n" +
+                        "    Batch: Same as Advanced, but converts a whole folder\n" +
                         "\n" +
                         "USAGE\n" +
                         "    SIMPLE:     java -jar mdMathTool_<version>.jar -s\n" +
@@ -41,7 +46,9 @@ public class mdMathTool {
                         "\n" +
                         "FORMATS\n" +
                         "    Common math delimiters are $ and $$, although the program will accept any delimiter put in. In Advanced Mode, delimiters must be surrounded with ' '\n" +
-                        "(e.g. '$'). Simple mode does not require the ' ' (for whatever reason). If \"github\" is chosen as the destination delimiter, the program will render all detected equations into images for use with GitHub.\n" +
+                        "(e.g. '$'). Simple mode does not require the ' ' (for whatever reason).\n" +
+                        "    If \"github\" is chosen as the destination delimiter, the program will render all detected equations into images for use with GitHub.\n" +
+                        "    For Batch mode, the <appendToFileName> flag is a string that will be appended to the end of the filename, before the extension. For example, if a folder you passed through batchmode had \"test.md\" and \"anothertest.md\", and you put \"bananas\" as appendToFileName, the output files would be \"testbananas.md\" and \"anothertestbananas.md\". appendToFileName cannot have any spaces.\n" +
                         "--------------------------------------------------------------");
 
                 System.exit(0);
@@ -243,69 +250,74 @@ public class mdMathTool {
         if(sourceDir.isDirectory()) {
             for(File sourceFile : sourceDir.listFiles()) {
                 String sourceFileString = sourceFile.toString();
-                System.out.println(sourceFileString);
-                int lastDotIndex = sourceFileString.lastIndexOf(".");
-                String destFileString = sourceFileString.substring(0, lastDotIndex)+appendToFilename+sourceFileString.substring(lastDotIndex);
-                File destFile = new File(destFileString);
-                if (destFile.createNewFile()) {
-                    System.out.println("File " + destFileString + " Created");
-                }
-                if (destDelim.toLowerCase().equals("github")) {
-                    convertToGitHub(sourceFile, destFile, sourceDelim);
-                } else {
-                    String sourceDelimL = sourceDelim;
-                    String sourceDelimR = sourceDelim;
-                    if (sourceDelim.toLowerCase().equals("latex\\[")) {
-                        // sourceDelimL = "\\[";
-                        // sourceDelimR = "\\]";
-                        System.err.println("This delimiter option is not supported yet");
-                        System.exit(0);
+                int lastIndex = sourceFileString.lastIndexOf(".");
+                if(lastIndex != -1) {
+                    if (sourceFileString.substring(sourceFileString.lastIndexOf(".")).equals(".md")) {
+                        System.out.println(sourceFileString);
+                        int lastDotIndex = sourceFileString.lastIndexOf(".");
+                        String destFileString = sourceFileString.substring(0, lastDotIndex) + appendToFilename + sourceFileString.substring(lastDotIndex);
+                        File destFile = new File(destFileString);
+                        if (destFile.createNewFile()) {
+                            System.out.println("File " + destFileString + " Created");
+                        }
+                        if (destDelim.toLowerCase().equals("github")) {
+                            convertToGitHub(sourceFile, destFile, sourceDelim);
+                        } else {
+                            String sourceDelimL = sourceDelim;
+                            String sourceDelimR = sourceDelim;
+                            if (sourceDelim.toLowerCase().equals("latex\\[")) {
+                                // sourceDelimL = "\\[";
+                                // sourceDelimR = "\\]";
+                                System.err.println("This delimiter option is not supported yet");
+                                System.exit(0);
+                            }
+                            if (sourceDelim.toLowerCase().equals("latex\\(")) {
+                                // sourceDelimL = "\\[";
+                                // sourceDelimR = "\\]";
+                                System.err.println("This delimiter option is not supported yet");
+                                System.exit(0);
+                            }
+                            if (sourceDelim.toLowerCase().equals("latex\\\\[")) {
+                                // sourceDelimL = "\\[";
+                                // sourceDelimR = "\\]";
+                                System.err.println("This delimiter option is not supported yet");
+                                System.exit(0);
+                            }
+                            if (sourceDelim.toLowerCase().equals("latex\\\\(")) {
+                                // sourceDelimL = "\\[";
+                                // sourceDelimR = "\\]";
+                                System.err.println("This delimiter option is not supported yet");
+                                System.exit(0);
+                            }
+                            String destDelimL = destDelim;
+                            String destDelimR = destDelim;
+                            if (destDelim.toLowerCase().equals("latex\\[")) {
+                                // destDelimL = "\\[";
+                                // destDelimR = "\\]";
+                                System.err.println("This delimiter option is not supported yet");
+                                System.exit(0);
+                            }
+                            if (destDelim.toLowerCase().equals("latex\\(")) {
+                                // destDelimL = "\\[";
+                                // destDelimR = "\\]";
+                                System.err.println("This delimiter option is not supported yet");
+                                System.exit(0);
+                            }
+                            if (destDelim.toLowerCase().equals("latex\\\\[")) {
+                                // destDelimL = "\\[";
+                                // destDelimR = "\\]";
+                                System.err.println("This delimiter option is not supported yet");
+                                System.exit(0);
+                            }
+                            if (destDelim.toLowerCase().equals("latex\\\\(")) {
+                                // destDelimL = "\\[";
+                                // destDelimR = "\\]";
+                                System.err.println("This delimiter option is not supported yet");
+                                System.exit(0);
+                            }
+                            replaceDelims(sourceFile, destFile, sourceDelimL, sourceDelimR, destDelimL, destDelimR);
+                        }
                     }
-                    if (sourceDelim.toLowerCase().equals("latex\\(")) {
-                        // sourceDelimL = "\\[";
-                        // sourceDelimR = "\\]";
-                        System.err.println("This delimiter option is not supported yet");
-                        System.exit(0);
-                    }
-                    if (sourceDelim.toLowerCase().equals("latex\\\\[")) {
-                        // sourceDelimL = "\\[";
-                        // sourceDelimR = "\\]";
-                        System.err.println("This delimiter option is not supported yet");
-                        System.exit(0);
-                    }
-                    if (sourceDelim.toLowerCase().equals("latex\\\\(")) {
-                        // sourceDelimL = "\\[";
-                        // sourceDelimR = "\\]";
-                        System.err.println("This delimiter option is not supported yet");
-                        System.exit(0);
-                    }
-                    String destDelimL = destDelim;
-                    String destDelimR = destDelim;
-                    if (destDelim.toLowerCase().equals("latex\\[")) {
-                        // destDelimL = "\\[";
-                        // destDelimR = "\\]";
-                        System.err.println("This delimiter option is not supported yet");
-                        System.exit(0);
-                    }
-                    if (destDelim.toLowerCase().equals("latex\\(")) {
-                        // destDelimL = "\\[";
-                        // destDelimR = "\\]";
-                        System.err.println("This delimiter option is not supported yet");
-                        System.exit(0);
-                    }
-                    if (destDelim.toLowerCase().equals("latex\\\\[")) {
-                        // destDelimL = "\\[";
-                        // destDelimR = "\\]";
-                        System.err.println("This delimiter option is not supported yet");
-                        System.exit(0);
-                    }
-                    if (destDelim.toLowerCase().equals("latex\\\\(")) {
-                        // destDelimL = "\\[";
-                        // destDelimR = "\\]";
-                        System.err.println("This delimiter option is not supported yet");
-                        System.exit(0);
-                    }
-                    replaceDelims(sourceFile, destFile, sourceDelimL, sourceDelimR, destDelimL, destDelimR);
                 }
             }
 
