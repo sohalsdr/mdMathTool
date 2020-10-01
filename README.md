@@ -37,10 +37,10 @@ Advanced Mode takes all arguments when the command is run, and can be run as fol
 $ java -jar mdMathTool-1.0.0.jar -a <source filepath> <destination filepath> <source delimiter> <destination delimiter>
 ```
 
-Batch Mode takes all arguments when the command is run, and can be run as follows:
+Batch Mode is similar to Advanced Mode, but processes whole folders:
 
 ```
-$ java -jar mdMathTool-1.0.0.jar -b <source filepath> <append to filename> <source delimiter> <destination delimiter>
+$ java -jar mdMathTool-1.0.0.jar -b <source folder> <append to filename> <source delimiter> <destination delimiter>
 ```
 
 **Notes:**
