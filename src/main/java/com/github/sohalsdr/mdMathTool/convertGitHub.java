@@ -4,10 +4,9 @@ import javax.script.*;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 public class convertGitHub {
@@ -61,9 +60,13 @@ public class convertGitHub {
         }
     }
     public static String githubify(String equation) throws ScriptException, NoSuchMethodException {
-        ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
-        Invocable invocable = (Invocable) engine;
-        Object scriptResult = invocable.invokeFunction("encodeURIComponent", equation);
-        return "<img src=\"https://render.githubusercontent.com/render/math?math=" + scriptResult.toString() + "\">";
+        String encodedQuery = encodeValue(equation);
+        return "<img src=\"https://render.githubusercontent.com/render/math?math=" + encodedQuery + "\">";
     }
-}
+    private static String encodeValue(String value) {
+        try {
+            return URLEncoder.encode(value, StandardCharsets.UTF_8.toString());
+        } catch (UnsupportedEncodingException ex) {
+            throw new RuntimeException(ex.getCause());
+        }
+}}
