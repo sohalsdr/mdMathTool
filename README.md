@@ -20,6 +20,7 @@ This is a tool to help work with inline math in markdown. Math can be frustratin
 - Does not parse the markdown, only performs basic string substitution
 
 ## Usage
+**Note:** Currently incompatible with Windows
 
 To use mdMathTool, start by downloading the latest release, and opening a terminal in the same folder as the .jar file.
 
