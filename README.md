@@ -1,4 +1,4 @@
-![](https://imgur.com/a/9V1Jd2P)
+![](https://github.com/sohalsdr/mdMathTool/raw/master/mdMathToolBanner.jpg)
 ![](https://img.shields.io/github/license/sohalsdr/mdMathTool?style=flat-square) ![](https://img.shields.io/tokei/lines/github/sohalsdr/mdMathTool?style=flat-square) ![](https://img.shields.io/github/downloads/sohalsdr/mdMathTool/total?style=flat-square) ![](https://img.shields.io/github/v/release/sohalsdr/mdMathTool?style=flat-square)
 
 This is a tool to help work with inline math in markdown. Math can be frustrating in markdown, with some parsers using \$ as a delimiter, some using \$\$ as a delimiter, others using a different delimiter, and then GitHub, which doesn't support inline math at all.
