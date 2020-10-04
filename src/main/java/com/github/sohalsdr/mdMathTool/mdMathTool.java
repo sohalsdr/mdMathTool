@@ -10,6 +10,8 @@ import static com.github.sohalsdr.mdMathTool.printToTerminal.printOut;
 
 public class mdMathTool {
     public static void main(String[] args) {
+        //MAKE SURE TO CHANGE VERSION BEFORE RELEASE!!!
+        String version = "1.1.2";
         try {
             if ((args[0].equals("-a")) || (args[0].equals("-s")) || (args[0].equals("-b"))) {
                 String mode = args[0];
@@ -28,7 +30,9 @@ public class mdMathTool {
                 } else if (mode.equals("-b")) {
                     batchMode(args[1], args[2], StringEscapeUtils.escapeJava(args[3]), args[4]);
                 }
-            } else if(args[0].equals("help")) {
+            } else if(args[0].equals("version")) {
+                System.out.println("mdMathTool release "+version);
+            }else if(args[0].equals("help")) {
                 // File modeHelp = new File("./modeHelp.txt");
                 // printOut(modeHelp);
                 System.out.print("----mdMathTool-----------------------------------------------\n" +
