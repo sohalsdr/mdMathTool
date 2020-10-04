@@ -64,7 +64,7 @@ Run using:
 java -jar mdMathTool_<version>.jar <arguments>
 ```
 
-**Homebrew(macOS):**
+**Homebrew(macOS, Linux):**
 
 ```
 brew install sohalsdr/tap/mdmathtool
