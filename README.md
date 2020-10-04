@@ -69,3 +69,22 @@ java -jar mdMathTool_<version>.jar <arguments>
 ```
 brew install sohalsdr/tap/mdmathtool
 ```
+
+Run using:
+```
+mdmathtool_<version>.exe <arguments>
+```
+
+**Scoop(Windows)**
+
+```
+scoop bucket add scoop-sohalsdr https://github.com/sohalsdr/scoop-sohalsdr
+```
+```
+scoop install mdmathtool
+```
+
+Run using:
+```
+mdmathtool_<version>.exe <arguments>
+```
