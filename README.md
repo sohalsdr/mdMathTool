@@ -72,7 +72,7 @@ brew install sohalsdr/tap/mdmathtool
 
 Run using:
 ```
-mdmathtool_<version>.exe <arguments>
+mdmathtool <arguments>
 ```
 
 **Scoop(Windows)**
