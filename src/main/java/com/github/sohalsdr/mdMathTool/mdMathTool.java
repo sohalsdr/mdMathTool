@@ -1,19 +1,22 @@
 package com.github.sohalsdr.mdMathTool;
 import org.apache.commons.text.StringEscapeUtils;
 
+import javax.script.ScriptException;
 import java.io.*;
 import java.util.Scanner;
 
 import static com.github.sohalsdr.mdMathTool.changeDelims.replaceDelims;
 import static com.github.sohalsdr.mdMathTool.convertGitHub.convertToGitHub;
+import static com.github.sohalsdr.mdMathTool.convertGitHub.githubify;
 import static com.github.sohalsdr.mdMathTool.printToTerminal.printOut;
 
 public class mdMathTool {
     public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
         //MAKE SURE TO CHANGE VERSION BEFORE RELEASE!!!
-        String version = "1.1.2";
+        String version = "1.2.0";
         try {
-            if ((args[0].equals("-a")) || (args[0].equals("-s")) || (args[0].equals("-b"))) {
+            if ((args[0].equals("-a")) || (args[0].equals("-s")) || (args[0].equals("-b")) || (args[0].equals("-q"))) {
                 String mode = args[0];
                 if (mode.equals("-a")) {
                     try {
@@ -29,32 +32,50 @@ public class mdMathTool {
                     simpleMode();
                 } else if (mode.equals("-b")) {
                     batchMode(args[1], args[2], StringEscapeUtils.escapeJava(args[3]), args[4]);
+                } else if (mode.equals("-q")) {
+                    if (args.length == 1) {
+                        System.out.println("Please enter the equation you want to quick-convert. ");
+                        System.out.print("Equation: ");
+                        String equation = in.nextLine();
+                        System.out.println(githubify(equation));
+                    } else if (args.length == 2) {
+                        String equation = args[1];
+                        System.out.println("Processing equation " + equation+"...");
+                        System.out.println(githubify(equation));
+                    } else {
+                        System.out.println("Not a valid equation. Please wrap any equations with spaces inside in quotations.");
+                    }
                 }
             } else if(args[0].equals("version")) {
                 System.out.println("mdMathTool release "+version);
             }else if(args[0].equals("help")) {
                 // File modeHelp = new File("./modeHelp.txt");
                 // printOut(modeHelp);
-                System.out.print("----mdMathTool-----------------------------------------------\n" +
+                System.out.print("----mdMathTool------------------------------------------------\n" +
                         "Various utilities to make working with math in markdown easier\n" +
                         "https://github.com/sohalsdr/mdMathTool\n" +
                         "\n" +
                         "MODES\n" +
-                        "    Simple: Prompts user through individual arguments\n" +
-                        "    Advanced: Accepts all arguments at command start\n" +
-                        "    Batch: Same as Advanced, but converts a whole folder\n" +
+                        "    SIMPLE:     Prompts user through individual arguments\n" +
+                        "    ADVANCED:   Accepts all arguments at command start\n" +
+                        "    BATCH:      Same as Advanced, but converts a whole folder\n" +
+                        "    QUICK:      You put in an equation, and it spits out a GitHub embed, as simple as that\n" +
                         "\n" +
                         "USAGE\n" +
-                        "    SIMPLE:     java -jar mdMathTool_<version>.jar -s\n" +
-                        "    ADVANCED:   java -jar mdMathTool_<version>.jar -a <Source File> <Destination File> <Source Delimiter> <Destination Delimiter>\n" +
-                        "    BATCH:      java -jar mdMathTool_<version>.jar -b <Source Folder> <Append To File Name> <Source Delimiter> <Destination Delimiter>\n" +
+                        "    SIMPLE:     mdmathtool -s\n" +
+                        "    ADVANCED:   mdmathtool -a <Source File> <Destination File> <Source Delimiter> <Destination Delimiter>\n" +
+                        "    BATCH:      mdmathtool -b <Source Folder> <Append To File Name> <Source Delimiter> <Destination Delimiter>\n" +
+                        "    QUICK:      mdmathtool -q\n" +
+                        "                or\n" +
+                        "                mdmathtool -q <equation>\n" +
                         "\n" +
                         "FORMATS\n" +
                         "    Common math delimiters are $ and $$, although the program will accept any delimiter put in. In Advanced Mode, delimiters must be surrounded with ' '\n" +
                         "(e.g. '$'). Simple mode does not require the ' ' (for whatever reason).\n" +
                         "    If \"github\" is chosen as the destination delimiter, the program will render all detected equations into images for use with GitHub.\n" +
                         "    For Batch mode, the <Append To File Name> flag is a string that will be appended to the end of the filename, before the extension. For example, if a folder you passed through batchmode had \"test.md\" and \"anothertest.md\", and you put \"bananas\" as appendToFileName, the output files would be \"testbananas.md\" and \"anothertestbananas.md\". appendToFileName cannot have any spaces.\n" +
-                        "-------------------------------------------------------------\n");
+                        "    In quick mode, if feeding the equation in as a commandline argument, it must be wrapped in quotations (e.g \"x^2 = 10\").\n" +
+                        "--------------------------------------------------------------");
 
                 System.exit(0);
             } else {
@@ -66,7 +87,7 @@ public class mdMathTool {
         } catch (ArrayIndexOutOfBoundsException ex) {
             System.out.println("No Mode argument found, please run with a mode argument");
             System.out.println("Run with argument \"help\" for more info");
-        } catch (IOException ex) {
+        } catch (IOException | NoSuchMethodException | ScriptException ex) {
             ex.printStackTrace();
         }
     }

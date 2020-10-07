@@ -12,13 +12,13 @@ jar {
 
 shadowJar{
     // Version!
-    archiveVersion = '1.1.2'
+    archiveVersion = '1.2.0'
     archiveFileName = "mdMathTool_${version}.${extension}"
 }
 
 group 'com.github.sohalsdr'
 // Version!
-version '1.1.2'
+version '1.2.0'
 
 repositories {
     mavenCentral()

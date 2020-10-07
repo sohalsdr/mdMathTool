@@ -3,18 +3,23 @@ Various utilities to make working with math in markdown easier
 https://github.com/sohalsdr/mdMathTool
 
 MODES
-    Simple: Prompts user through individual arguments
-    Advanced: Accepts all arguments at command start
-    Batch: Same as Advanced, but converts a whole folder
+    SIMPLE:     Prompts user through individual arguments
+    ADVANCED:   Accepts all arguments at command start
+    BATCH:      Same as Advanced, but converts a whole folder
+    QUICK:      You put in an equation, and it spits out a GitHub embed, as simple as that
 
 USAGE
-    SIMPLE:     java -jar mdMathTool_<version>.jar -s
-    ADVANCED:   java -jar mdMathTool_<version>.jar -a <Source File> <Destination File> <Source Delimiter> <Destination Delimiter>
-    BATCH: java -jar mdMathTool_<version>.jar -b <Source Folder> <Append To File Name> <Source Delimiter> <Destination Delimiter>
+    SIMPLE:     mdmathtool -s
+    ADVANCED:   mdmathtool -a <Source File> <Destination File> <Source Delimiter> <Destination Delimiter>
+    BATCH:      mdmathtool -b <Source Folder> <Append To File Name> <Source Delimiter> <Destination Delimiter>
+    QUICK:      mdmathtool -q
+                or
+                mdmathtool -q <equation>
 
 FORMATS
     Common math delimiters are $ and $$, although the program will accept any delimiter put in. In Advanced Mode, delimiters must be surrounded with ' '
 (e.g. '$'). Simple mode does not require the ' ' (for whatever reason).
     If "github" is chosen as the destination delimiter, the program will render all detected equations into images for use with GitHub.
     For Batch mode, the <Append To File Name> flag is a string that will be appended to the end of the filename, before the extension. For example, if a folder you passed through batchmode had "test.md" and "anothertest.md", and you put "bananas" as appendToFileName, the output files would be "testbananas.md" and "anothertestbananas.md". appendToFileName cannot have any spaces.
+    In quick mode, if feeding the equation in as a commandline argument, it must be wrapped in quotations (e.g "x^2 = 10").
 --------------------------------------------------------------
