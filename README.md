@@ -22,26 +22,24 @@ This is a tool to help work with inline math in markdown. Math can be frustratin
 ## Usage
 **Note:** Currently has been tested on macOS Catalina, Windows 10, and Android 7.0.0 (via termux)
 
-To use mdMathTool, start by downloading the latest release, and opening a terminal in the same folder as the .jar file.
-
 mdMathTool has three modes: Simple Mode, Advanced Mode, and Batch Mode:
 
 Simple Mode prompts the user for all values, and can be run with:
 
 ```
-$ java -jar mdMathTool-1.0.0.jar -s
+$ mdmathtool -s
 ```
 
 Advanced Mode takes all arguments when the command is run, and can be run as follows:
 
 ```
-$ java -jar mdMathTool-1.0.0.jar -a <source filepath> <destination filepath> <source delimiter> <destination delimiter>
+$ mdmathtool -a <source filepath> <destination filepath> <source delimiter> <destination delimiter>
 ```
 
 Batch Mode is similar to Advanced Mode, but processes whole folders:
 
 ```
-$ java -jar mdMathTool-1.0.0.jar -b <source folder> <append to filename> <source delimiter> <destination delimiter>
+$ mdmathtool -b <source folder> <append to filename> <source delimiter> <destination delimiter>
 ```
 
 **Notes:**
@@ -51,9 +49,42 @@ $ java -jar mdMathTool-1.0.0.jar -b <source folder> <append to filename> <source
 - mdMathTool will create the destination filepath specified if it does not already exist
 - The append to file name argument appends the specified string directly after the filename, before the extension. It cannot be left empty.
 
+## Installation
 
+**Java(Universal):**
 
+Requires >=Java 1.8
 
+Download the latest jar release from the Releases page.
 
+Navigate to the directory you downloaded the file to and open a terminal there.
 
+Run using:
+```
+java -jar mdMathTool_<version>.jar <arguments>
+```
 
+**Homebrew(macOS, Linux):**
+
+```
+brew install sohalsdr/tap/mdmathtool
+```
+
+Run using:
+```
+mdmathtool <arguments>
+```
+
+**Scoop(Windows)**
+
+```
+scoop bucket add scoop-sohalsdr https://github.com/sohalsdr/scoop-sohalsdr
+```
+```
+scoop install mdmathtool
+```
+
+Run using:
+```
+mdmathtool_<version>.exe <arguments>
+```
