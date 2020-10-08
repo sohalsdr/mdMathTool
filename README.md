@@ -49,7 +49,7 @@ $ mdmathtool -q
 Or the equation can be passed in directly through the command line (equation **MUST** be wrapped in quotations)
 ```
 $ mdmathtool -q <equation>
-``
+```
 
 **Notes:**
 
