@@ -95,5 +95,5 @@ scoop install mdmathtool
 
 Run using:
 ```
-mdmathtool_<version>.exe <arguments>
+mdmathtool <arguments>
 ```
