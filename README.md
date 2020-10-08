@@ -42,6 +42,15 @@ Batch Mode is similar to Advanced Mode, but processes whole folders:
 $ mdmathtool -b <source folder> <append to filename> <source delimiter> <destination delimiter>
 ```
 
+Quick Mode will convert a given LaTeX expression into a github-friendly image embed, it can either be run with no argument, and the user will be prompted:
+```
+$ mdmathtool -q
+```
+Or the equation can be passed in directly through the command line (equation **MUST** be wrapped in quotations)
+```
+$ mdmathtool -q <equation>
+``
+
 **Notes:**
 
 - Source and destination delimiters must be surrounded by ' ' (e. g. '\$')
